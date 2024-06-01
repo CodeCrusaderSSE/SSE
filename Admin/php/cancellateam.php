@@ -10,7 +10,11 @@ if ($cod == null) {
 echo ("<p> <center> <font color=black font face='Courier'> Compila tutti i campi.</center></p>");
 }
 elseif ($cod !== null){
-	$resultC = mysqli_query($conn,"SELECT * FROM team WHERE codice =' $cod'");
+	$stmt = $conn->prepare("SELECT * FROM team WHERE codice = ?");
+	$stmt->bind_param("i",$cod);
+	$stmt->execute();
+	$resultC = $stmt->get_result();
+	#$resultC = mysqli_query($conn,"SELECT * FROM team WHERE codice =' $cod'");
 	if($resultC){
 		$row = mysqli_fetch_assoc($resultC);
 		if($cod == $row['codice']){
