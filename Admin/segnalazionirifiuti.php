@@ -249,17 +249,10 @@ $grav = isset($_POST['gravit']) ? $_POST['gravit'] : null;
 if (isset($_POST['submit'])) {
     if ($idt !== null && $grav !== null) {
         // Prepare the select statement
-        $stmt = $conn->prepare("SELECT id FROM segnalazioni WHERE tipo = ? AND id = ?");
+        $stmt = $conn->prepare("SELECT id FROM segnalazioni WHERE tipo = 2 AND id = ?");
         if ($stmt === false) {
             die("Prepare failed: " . $conn->error);
         }
-
-        $tipo = 2; // Fixed type for the select query
-        $stmt->bind_param("ii", $tipo, $idt);
-
-        // Execute the statement
-        $stmt->execute();
-        $resultC = $stmt->get_result();
 
         if ($resultC->num_rows > 0) {
             // Prepare the update statement
