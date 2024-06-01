@@ -25,7 +25,7 @@
 
 	<!-- Grafico -->
 	<link rel="stylesheet" href="css/graficostyle.css">
-	   
+
   </head>
 
 <body id="page-top">
@@ -61,7 +61,7 @@ inserisci segnalazione
 
 <?php
 
-$conn = mysqli_connect ("localhost","root","","civicsense") or die ("Connessione non riuscita"); 
+$conn = mysqli_connect ("localhost","root","","civicsense") or die ("Connessione non riuscita");
 
 $data = (isset($_POST['data'])) ? $_POST['data'] : null;
 $ora = (isset($_POST['ora'])) ? $_POST['ora'] : null;
@@ -73,13 +73,27 @@ $lat = (isset($_POST['lat'])) ? $_POST['lat'] : null;
 $long = (isset($_POST['long'])) ? $_POST['long'] : null;
 $tipo = (isset($_POST['tipo'])) ? $_POST['tipo'] : null;
 
-        $sql = "INSERT INTO segnalazioni
-            (datainv, orainv, via, descrizione, foto, email, tipo, latitudine, longitudine)
-            VALUES
-            ('$data','$ora', '$via', '$descr', '$foto', '$email', '$tipo', '$lat', '$long') ";
-        $result = mysqli_query($conn,$sql);
 
- if($result){
+$stmt = $conn->prepare("INSERT INTO segnalazioni (datainv, orainv, via, descrizione, foto, email, tipo, latitudine, longitudine) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+if ($stmt === false) {
+    die("Prepare failed: " . $conn->error);
+}
+
+// Bind the parameters
+$stmt->bind_param("ssssbsidd", $data, $ora, $via, $descr, $foto, $email, $tipo, $lat, $long);
+
+// Execute the statement
+if ($stmt->execute() === false) {
+    die("Execute failed: " . $stmt->error);
+} else {
+    echo "Record inserted successfully";
+}
+
+// Close the statement and connection
+$stmt->close();
+$conn->close();
+
+if($result){
 echo "<center> inserimento avvenuto. </center>";
 
 }

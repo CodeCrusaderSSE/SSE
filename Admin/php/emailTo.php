@@ -7,16 +7,17 @@ session_start();
 
 require ('phpmailer/class.phpmailer.php');
 include('phpmailer/class.smtp.php');
-$conn = mysqli_connect ("localhost", "root", "","civicsense") or die ("Connessione non riuscita"); 
 
 if (isset($_POST['id'])&& isset($_POST['stato'])) {
 	$idS = $_POST['id'];
 	$stato = $_POST['stato'];
-	
-	$query = "SELECT * FROM segnalazioni WHERE id =$idS";
-	
-	$result = mysqli_query($conn,$query);	
-	
+
+	$conn = mysqli_connect ("localhost", "root", "","civicsense") or die ("Connessione non riuscita"); 		
+	$stmt = $conn->prepare("SELECT * FROM segnalazioni WHERE id =?");
+	$stmt->bind_param("i",$idS);
+	$stmt->execute();
+	$result = $stmt->get_result();
+
 	if($result){
 		//da ente a team
 		$row = mysqli_fetch_assoc($result);

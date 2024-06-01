@@ -1,6 +1,5 @@
 <?php
 
-$conn = mysqli_connect ("localhost", "root", "","civicsense") or die ("Connessione non riuscita"); 
 
 $cod = (isset($_POST['cod'])) ? $_POST['cod'] : null;
 
@@ -10,18 +9,18 @@ if ($cod == null) {
 echo ("<p> <center> <font color=black font face='Courier'> Compila tutti i campi.</center></p>");
 }
 elseif ($cod !== null){
+	$conn = mysqli_connect ("localhost", "root", "","civicsense") or die ("Connessione non riuscita");
 	$stmt = $conn->prepare("SELECT * FROM team WHERE codice = ?");
 	$stmt->bind_param("i",$cod);
 	$stmt->execute();
 	$resultC = $stmt->get_result();
-	#$resultC = mysqli_query($conn,"SELECT * FROM team WHERE codice =' $cod'");
+
 	if($resultC){
 		$row = mysqli_fetch_assoc($resultC);
 		if($cod == $row['codice']){
-			$query = "DELETE FROM team WHERE codice = '$cod'";
-
-			$result = mysqli_query($conn,$query);	
-
+			$stmt = $conn->prepare("DELETE FROM team WHERE codice = ?");
+			$stmt->bind_param("i",$cod);
+			$stmt->execute();
 			if($query){
 				echo("<br><b><br><p> <center> <font color=black font face='Courier'> Aggiornamento avvenuto correttamente. Ricarica la pagina per aggiornare la tabella.</b></center></p><br><br> ");
 			} 
@@ -29,8 +28,10 @@ elseif ($cod !== null){
 			echo ("<p> <center> <font color=black font face='Courier'> Inserisci ID esistente.</center></p>");
 		}
 	}
-}
-}
 
+}
+}
+$stmt->close();
+$conn->close();
 
 ?>

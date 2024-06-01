@@ -49,9 +49,8 @@ if (mysqli_num_rows($quer) > 0) {
     "month": "FEB",
     "value1": 
 	<?php 
-	
+	 
 $conn = mysqli_connect("localhost", "root","","civicsense") or die ("Connessione non riuscita"); 
- 
 
 $quer = mysqli_query ($conn,"Select COUNT(*) AS cont
 FROM segnalazioni

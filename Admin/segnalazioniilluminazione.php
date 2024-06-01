@@ -172,7 +172,7 @@
             var marker = new google.maps.Marker({
               map: map,
               position: location
-           
+
             }); " ;
           }
           mysqli_close($conn);
@@ -248,34 +248,60 @@ Modifica gravità di una segnalazione</div>
 
 $conn = mysqli_connect ("localhost", "root", "","civicsense") or die ("Connessione non riuscita"); 
 
-$idt = (isset($_POST['idt'])) ? $_POST['idt'] : null;
-$grav = (isset($_POST['gravit'])) ? $_POST['gravit'] : null;
+$idt = isset($_POST['idt']) ? $_POST['idt'] : null;
+$grav = isset($_POST['gravit']) ? $_POST['gravit'] : null;
 
+if (isset($_POST['submit'])) {
+    if ($idt !== null && $grav !== null) {
+        // Prepare the select statement
+        $stmt = $conn->prepare("SELECT id FROM segnalazioni WHERE tipo = 5 AND id = ?");
+        if ($stmt === false) {
+            die("Prepare failed: " . $conn->error);
+        }
 
-if (isset($_POST['submit'])){   
+        // Bind the parameters
+        $stmt->bind_param("i", $idt);
 
-if ($idt && $grav !== null) {
+        // Execute the statement
+        $stmt->execute();
 
-  $resultC = mysqli_query($conn,"SELECT * FROM segnalazioni WHERE tipo = '5'");
-  if($resultC){
-    $row = mysqli_fetch_assoc($resultC);
-    if($id == $row['id']){
-      $query = "UPDATE segnalazioni SET gravita = '$grav' WHERE id = '$idt'";
+        // Get the result
+        $resultC = $stmt->get_result();
 
-      $result = mysqli_query($conn,$query); 
+        if ($resultC->num_rows > 0) {
+            // Prepare the update statement
+            $update_stmt = $conn->prepare("UPDATE segnalazioni SET gravita = ? WHERE id = ?");
+            if ($update_stmt === false) {
+                die("Prepare failed: " . $conn->error);
+            }
 
-      if($query){
-        echo("<br><b><br><p> <center> <font color=black font face='Courier'> Aggiornamento avvenuto correttamente. Ricarica la pagina per aggiornare la tabella.</b></center></p><br><br> ");
-      } 
-    }else{
-      echo "<p> <center> <font color=black font face='Courier'> Inserisci ID esistente.</b></center></p>";
+            // Bind the parameters
+            $update_stmt->bind_param("ii", $grav, $idt);
+
+            // Execute the statement
+            if ($update_stmt->execute()) {
+                echo "<br><b><br><p><center><font color=black font face='Courier'>Aggiornamento avvenuto correttamente. Ricarica la pagina per aggiornare la tabella.</font></center></p><br><br>";
+            } else {
+                echo "<p><center><font color=black font face='Courier'>Errore nell'aggiornamento dei dati: " . $update_stmt->error . "</font></center></p>";
+            }
+
+            // Close the update statement
+            $update_stmt->close();
+        } else {
+            echo "<p><center><font color=black font face='Courier'>Inserisci ID esistente.</font></center></p>";
+        }
+
+        // Close the select statement
+        $stmt->close();
+    } else {
+        echo "<p><center><font color=black font face='Courier'>ID e gravità sono richiesti.</font></center></p>";
     }
-  }
 }
-else {
-  echo ("<p> <center> <font color=black font face='Courier'> Compila tutti i campi.</b></center></p>");
-}
-}
+
+// Close the connection
+$conn->close();
+
+
 
 ?>
 <br><br><br>

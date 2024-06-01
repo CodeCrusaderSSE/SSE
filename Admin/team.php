@@ -273,25 +273,40 @@ $numeri = (isset($_POST['numero'])) ? $_POST['numero'] : null;
 $pass = (isset($_POST['password'])) ? $_POST['password'] : null;
 
 
-if (isset($_POST['submit3'])){ 
-if ($email && $nomi && $numeri && $pass !== null) {
-#inserisco i valori salvati dal form nella query di inserimento
+if (isset($_POST['submit3'])) {
+    if ($email !== null && $nomi !== null && $numeri !== null && $pass !== null) {
+        // Prepare the insert statement
+        $stmt = $conn->prepare("INSERT INTO team (email_t, npersone, nomi, password) VALUES (?, ?, ?, ?)");
+        if ($stmt === false) {
+            die("Prepare failed: " . $conn->error);
+        }
 
- $toinsert = "INSERT INTO team
-			(email_t, npersone, nomi, password)
-			VALUES
-			('$email','$numeri', '$nomi','$pass')";
+        // Bind the parameters
+        $stmt->bind_param("siss", $email, $numeri, $nomi, $pass);
 
+        // Execute the statement
+        if ($stmt->execute()) {
+            echo "<p><center><font color=black font face='Courier'>Dati inseriti correttamente.</font></center></p>";
+        } else {
+            echo "<p><center><font color=black font face='Courier'>Errore nell'inserimento dei dati: " . $stmt->error . "</font></center></p>";
+        }
 
-$result = mysqli_query ($conn,$toinsert);	
+        // Close the statement
+        $stmt->close();
+    } else {
+        echo "<p><center><font color=black font face='Courier'>Compila tutti i campi.</font></center></p>";
+    }
+}
 
+// Close the connection
+$conn->close();
 if($result){
 	echo("<b><br><p> <center> <font color=black font face='Courier'> Inserimento avvenuto correttamente! Ricarica la pagina per vedere la tabella aggiornata!</p></b></center>");
-}  
-} else {
+}
+ else {
   echo ("<p> <center> <font color=black font face='Courier'>Compila tutti i campi.</p></b></center>");
 }
-}
+
 
 ?>
 

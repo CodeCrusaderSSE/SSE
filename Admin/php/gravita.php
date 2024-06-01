@@ -1,10 +1,5 @@
 <?php
 
-$conn = mysqli_connect("localhost", "root","","civicsense") or die ("Connessione non riuscita"); 
-
-  
-
-
 $id = (isset($_POST['id'])) ? $_POST['id'] : null;
 $stato = (isset($_POST['stato'])) ? $_POST['stato'] : null;
 
@@ -12,9 +7,11 @@ if (isset($_POST['submit'])){
 
 if ($id && $stato !== null) {
 
- $query = ("UPDATE segnalazioni SET stato = $stato WHERE id = $id");
-
-$result = mysqli_query ($conn,$query);	
+ $conn = mysqli_connect ("localhost", "root", "","civicsense") or die ("Connessione non riuscita"); 
+ $stmt = $conn->prepare("UPDATE segnalazioni SET stato = ? WHERE id = ?");
+ $stmt->bind_param("si",$stato,$id);
+ $stmt->execute();
+ $result = $stmt->get_result();
 
 if($result){
 
@@ -37,5 +34,6 @@ else {
 	echo("inserisci tutti i campi");
 }
 }
-
+$stmt->close();
+$conn->close();
 ?>

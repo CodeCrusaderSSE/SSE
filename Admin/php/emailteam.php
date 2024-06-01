@@ -1,7 +1,7 @@
 <?php
 require ('C:\xampp\htdocs\Ingegneria\Admin\phpmailer\class.phpmailer.php');
 include('C:\xampp\htdocs\Ingegneria\Admin\phpmailer\class.smtp.php');
-$conn = mysqli_connect ("localhost", "root", "","civicsense") or die ("Connessione non riuscita"); 
+
 
 $id = (isset($_POST['id'])) ? $_POST['id'] : null;
 $team =(isset($_POST['team'])) ? $_POST['team'] : null;
@@ -10,22 +10,30 @@ $team =(isset($_POST['team'])) ? $_POST['team'] : null;
 if (isset($_POST['submit'])){   
 
 if ($id && $team !== null) {
-
+	$conn = mysqli_connect ("localhost", "root", "","civicsense") or die ("Connessione non riuscita"); 
 	$resultC = mysqli_query ($conn,"SELECT * FROM segnalazioni WHERE gravita IS NOT NULL AND team IS NULL");
+	
 	if($resultC){
 		$row = mysqli_fetch_assoc($resultC);
 		if($id == $row['id']){
-			$query = ( "UPDATE segnalazioni SET team = '$team', stato = 'In attesa' WHERE id = '$id' ");
 			
-			$result = mysqli_query($conn,$query);	
+			$stmt = $conn->prepare("UPDATE segnalazioni SET team = ?, stato = 'In attesa' WHERE id = ? ");
+			$stmt->bind_param("ii",$team,$id);
+			$stmt->execute();
+			$result = $stmt->get_result();
+
 			if ($result){
 
 				echo('<center><b>Aggiornamento avvenuto con successo.</b></center>');
 				$mail = new PHPMailer();
 				
 				try {
-					$query1 = ("SELECT * FROM team WHERE codice = $team");
-					$result1 = mysqli_query($conn,$query1);	
+
+					$stmt = $conn->prepare("SELECT * FROM team WHERE codice = ?");
+					$stmt->bind_param("i",$team);
+					$stmt->execute();
+					$result1 = $stmt->get_result();
+
 					if($result1){
 						$row = mysqli_fetch_assoc($result1);
 						$mail->SMTPAuth   = true;                  // sblocchi SMTP 
@@ -61,5 +69,6 @@ else {
 	echo "<center><b>Inserire tutti i campi.</b></center>";
 }
 }
-
+$stmt->close();
+$conn->close();
 ?>

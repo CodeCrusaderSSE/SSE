@@ -16,13 +16,12 @@
 		}
 		else
 		{
-			//Connessione Database
-			$conn = mysqli_connect("localhost", "root","","civicsense") or die ("Connessione non riuscita"); 
-	          #connessione al db
-
-
-			$sql = 'SELECT * FROM team WHERE email_t = ' .$email. ';';
-			$result = mysqli_query ($conn,$sql);	
+			
+			$conn = mysqli_connect ("localhost", "root", "","civicsense") or die ("Connessione non riuscita"); 
+			$stmt = $conn->prepare("SELECT * FROM team WHERE email_t = ?");
+			$stmt->bind_param("s",$email);
+			$stmt->execute();
+			$result = $stmt->get_result();
 
 			if (mysqli_num_rows($result) > 0) {
 	   
@@ -39,7 +38,8 @@
 			
 				}
 			}
-			mysqli_close($conn);
+			$stmt->close();
+			$conn->close();
 		}
 	}
 	else{

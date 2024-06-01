@@ -60,26 +60,48 @@
 	
 <?php
 
-$conn = mysqli_connect("localhost", "root","","civicsense") or die ("Connessione non riuscita"); 
-  
+$conn = mysqli_connect("localhost", "root","","civicsense") or die ("Connessione non riuscita");
 
 
-$email = (isset($_POST['email'])) ? $_POST['email'] : null;
-$pass = (isset($_POST['password'])) ? $_POST['password'] : null;
+// Check connection
+if ($conn->connect_error) {
+    die("Connessione non riuscita: " . $conn->connect_error);
+}
 
+// Retrieve POST data
+$email = isset($_POST['email']) ? $_POST['email'] : null;
+$pass = isset($_POST['password']) ? $_POST['password'] : null;
 
-if ($email && $pass !== null) {
+if ($email !== null && $pass !== null) {
+    // Prepare the update statement
+    $stmt = $conn->prepare("UPDATE team SET password = ? WHERE email_t = ?");
+    if ($stmt === false) {
+        die("Prepare failed: " . $conn->error);
+    }
 
+    // Bind the parameters
+    $stmt->bind_param("ss", $pass, $email);
 
- $query = ("UPDATE team SET password = '$pass' WHERE email_t = '$email'");
+    // Execute the statement
+    if ($stmt->execute()) {
+        echo "Password updated successfully";
+    } else {
+        echo "Error updating password: " . $stmt->error;
+    }
 
-$result = mysqli_query ($conn,$query);	
+    // Close the statement
+    $stmt->close();
+} else {
+    echo "Email and password must be provided";
+}
 
+// Close the connection
+$conn->close();
 if($query){
 	echo("<br><b><br><p> <center> <font color=white font face='Courier'> Password registrata! Clicca su <a href='login.php'> Login </a> per accedere. </b></center></p><br><br> ");
 } 
-}	
-	
+
+
 ?>	
 	
 

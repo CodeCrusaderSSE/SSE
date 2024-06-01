@@ -1,16 +1,15 @@
 ﻿<?php
-$conn = mysqli_connect("localhost", "root","","civicsense") or die ("Connessione non riuscita"); 
 
-  #connessione al db
-
-
-	$upload_path = 'img/';
-  $quer = mysqli_query ($conn,"SELECT * FROM segnalazioni WHERE tipo = '4' ");
-  
-
+	$upload_path = 'img/';  
+  $conn = mysqli_connect ("localhost", "root", "","civicsense") or die ("Connessione non riuscita"); 
+  $stmt = $conn->prepare("SELECT * FROM segnalazioni WHERE tipo = ? ");
+  $stmt->bind_param("i",$tipo);
+  $stmt->execute();
+  $result = $stmt->get_result();
 
 
-    while($row = mysqli_fetch_assoc($quer)) {
+
+    while($row = mysqli_fetch_assoc($result)) {
         echo "
     <tr>
      
@@ -36,4 +35,7 @@ $conn = mysqli_connect("localhost", "root","","civicsense") or die ("Connessione
                
           </tr> ";
     }
+
+$stmt->close();
+$conn->close();
 ?>
