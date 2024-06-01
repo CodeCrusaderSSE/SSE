@@ -3,7 +3,6 @@
 	$upload_path = 'img/';  
   $conn = mysqli_connect ("localhost", "root", "","civicsense") or die ("Connessione non riuscita"); 
   $stmt = $conn->prepare("SELECT * FROM segnalazioni WHERE tipo = '4' ");
-  $stmt->bind_param("i",$tipo);
   $stmt->execute();
   $result = $stmt->get_result();
 
