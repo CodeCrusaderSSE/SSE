@@ -23,8 +23,8 @@ if (isset($_POST['id'])&& isset($_POST['stato'])) {
 		//da team a ente e utente
 		$row = $result->fetch_assoc();
 		if($row['stato']=="In attesa" && $stato=="In risoluzione"){ //confronta stato attuale e quello da modificare
-			$stmt2=$conn->prepare("UPDATE segnalazioni SET stato = '$stato' WHERE id = ?");
-			$stmt2->bind_param("i",$idS);
+			$stmt2=$conn->prepare("UPDATE segnalazioni SET stato = ? WHERE id = ?");
+			$stmt2->bind_param("si",$stato,$idS);
 			$stmt2->execute();
 			$result1 = $stmt2->get_result();
 			if($result1){
@@ -57,8 +57,8 @@ if (isset($_POST['id'])&& isset($_POST['stato'])) {
 		}
 		//da team a ente e utente
 		else if($row['stato']=="In risoluzione" && $stato=="Risolto"){
-			$stmt3=$conn->prepare("UPDATE segnalazioni SET stato = '$stato' WHERE id = ?");
-			$stmt3->bind_param("i",$idS)
+			$stmt3=$conn->prepare("UPDATE segnalazioni SET stato = ? WHERE id = ?");
+			$stmt3->bind_param("si",$stato,$idS)
 			$stmt3->execute();
 			$result1 = $stmt3->get_result();
 			if($result1){

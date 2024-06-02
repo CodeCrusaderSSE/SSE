@@ -211,11 +211,7 @@
 
 
                     //da qui c'è il menù a discesa riempito con i valori del database
-                    echo "
-
-		<option value='$codice'>$email</option>
-
-	";
+                    echo "<option value='$codice'>$email</option>";
                   }
                 }
                 ?>
