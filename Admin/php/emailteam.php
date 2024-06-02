@@ -2,7 +2,7 @@
 require ('C:\xampp\htdocs\Ingegneria\Admin\phpmailer\class.phpmailer.php');
 include ('C:\xampp\htdocs\Ingegneria\Admin\phpmailer\class.smtp.php');
 
-
+$config = include('config.php');
 $id = (isset($_POST['id'])) ? $_POST['id'] : null;
 $team = (isset($_POST['team'])) ? $_POST['team'] : null;
 
@@ -42,8 +42,8 @@ if (isset($_POST['submit'])) {
 							$mail->Port = 465;   				// inserisci la porta smtp per il server DOMINIO
 							$mail->SMTPKeepAlive = true;
 							$mail->Mailer = "smtp";
-							$mail->Username = "civicsense2019@gmail.com";     // DOMINIO username
-							$mail->Password = "c1v1csense2019";            // DOMINIO password
+							$mail->Username = $config['SMTP_USERNAME'];
+                            $mail->Password = $config['SMTP_PASSWORD'];
 							$mail->AddAddress($row["email_t"]);
 							$mail->SetFrom("civicsense2019@gmail.com");
 							$mail->Subject = 'Nuova Segnalazione';

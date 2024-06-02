@@ -4,7 +4,7 @@ session_start();
 //adatto a tutti i domini (GMAIL,LIBERO.HOTMAIL)
 //classi per l'invio dell'email (PHPMailer 5.2)
 
-
+$config = include('config.php');
 require ('phpmailer/class.phpmailer.php');
 include('phpmailer/class.smtp.php');
 
@@ -34,8 +34,8 @@ if (isset($_POST['id'])&& isset($_POST['stato'])) {
 				  $mail->Port       = 465;   				// inserisci la porta smtp per il server DOMINIO
 				  $mail->SMTPKeepAlive = true;
 				  $mail->Mailer = "smtp";
-				  $mail->Username   = "civicsense18@gmail.com";     // DOMINIO username
-				  $mail->Password   = "c1v1csense2019";            // DOMINIO password
+				  $mail->Username = $config['SMTP_USERNAME'];
+				  $mail->Password = $config['SMTP_PASSWORD'];
 				  $mail->AddAddress("$_SESSION['email']");
 				  $mail->SetFrom("civicsense18@gmail.com");
 				  $mail->Subject = 'Nuova Segnalazione';
