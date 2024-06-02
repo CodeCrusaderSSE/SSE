@@ -199,7 +199,7 @@ Modifica stato di una segnalazione</div>
 
 	<form  method="post" action ="modifiche.php" style=" margin-top:5%; margin-left:5%">
 <b>CODICE SEGNALAZIONE DA MODIFICARE: <input type="text" name="id"><br><br></b>
-<b> INSERISCI LO STATO MODIFICATO: </b> <select class="text" name="stato"> 
+<b> INSERISCI LO STATO MODIFICATO: </b> <select class="text" name="stato">
    
     <option value="Risolto">Risolto</option>
     <option value="In risoluzione">In risoluzione</option>
