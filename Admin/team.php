@@ -300,9 +300,15 @@
                 echo ("<p> <center> <font color=black font face='Courier'>Compila tutti i campi.</p></b></center>");
               }
             }
-function sanitaze($connection,$string){
+
+
+/* Able to sanitaze the input string by the user.
+Params:
+$string = The input string to sanitaze.
+$conn = The connection to the database. */
+function sanitaze($string,$conn){
   $string=stripslashes($string);
-  $string=mysqli_real_escape_string($connection,$string);
+  $string=mysqli_real_escape_string($conn,$string);
   $string=htmlspecialchars($string);
   return $string;
 }

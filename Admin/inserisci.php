@@ -102,9 +102,9 @@ echo "<center> inserimento avvenuto. </center>";
 }
 
 
-function sanitaze($string){
+function sanitaze($string,$conn){
   $string=stripslashes($string);
-  $string=mysqli_real_escape_string($string);
+  $string=mysqli_real_escape_string($conn,$string);
   $string=htmlspecialchars($string)
   return $string
 }
