@@ -1,5 +1,5 @@
 <?php
-$conn = mysqli_connect ("localhost", "root", "","civicsense") or die ("Connessione non riuscita"); 
+$conn = mysqli_connect ("localhost", "root", "","civicsense") or die ("Connessione non riuscita");
 
 $sql = mysqli_query($conn,"SELECT * FROM team");
 
