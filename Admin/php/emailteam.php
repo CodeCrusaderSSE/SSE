@@ -1,6 +1,6 @@
 <?php
-require ('C:\xampp\htdocs\Ingegneria\Admin\phpmailer\class.phpmailer.php');
-include ('C:\xampp\htdocs\Ingegneria\Admin\phpmailer\class.smtp.php');
+require ('C:\xampp\htdocs\Ingegneria\Admin\phpmailer\src\PHPMailer.php');
+include ('C:\xampp\htdocs\Ingegneria\Admin\phpmailer\src\SMTP.php');
 
 $config = include('config.php');
 $id = (isset($_POST['id'])) ? $_POST['id'] : null;

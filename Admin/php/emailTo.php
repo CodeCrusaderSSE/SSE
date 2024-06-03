@@ -5,8 +5,8 @@ session_start();
 //classi per l'invio dell'email (PHPMailer 5.2)
 
 $config = include('config.php');
-require ('phpmailer/class.phpmailer.php');
-include('phpmailer/class.smtp.php');
+require ('C:\xampp\htdocs\Ingegneria\Admin\phpmailer\src\PHPMailer.php');
+include ('C:\xampp\htdocs\Ingegneria\Admin\phpmailer\src\SMTP.php');
 
 if (isset($_POST['id'])&& isset($_POST['stato'])) {
 	$idS = $_POST['id'];
