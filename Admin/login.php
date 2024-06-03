@@ -66,59 +66,58 @@
 
 
     <?php
-  //Recupero dati
-  if(isset($_POST['email']) && isset($_POST['password'])){
+session_start(); // Ensure session is started
+
+// Load the configuration settings
+$config = include('php/config.php');
+
+// Recupero dati
+if (isset($_POST['email']) && isset($_POST['password'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
-    if($email == "civicsense2019@gmail.com")
-    {
-      if($password == "admin")
-      {
-        echo 'Accesso consentito alla sezione riservata';
-        echo '<script>window.location.href = "index.php";</script>';
 
-      }
-      else
-      {
-        echo 'Accesso negato alla sezione riservata.La password è errata!';
-      }
-    }
-    else
-    {
-      //Connessione Database
-     $config = include('php/config.php');
-$psw = $config['DB_PSW'];
-$conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessione non riuscita"); #connessione a mysql, la pass non la ho xk è scaricato automaticamente
+    // Retrieve admin credentials from the config
+    $adminEmail = $config['ADMIN_EMAIL'];
+    $adminPassword = $config['ADMIN_PASSWORD'];
 
-  #connessione al db
-
-
-
-      $sql = "SELECT * FROM team ";
-     
-$result = mysqli_query ($conn,$sql);
-    
-
-
-if (mysqli_num_rows($result) > 0) {
-	
-    while($row = mysqli_fetch_assoc($result))
-        {
-          if($password != $row["password"] || $email != $row["email_t"])
-          {
-            //CODICE JAVASCRIPT
-            echo 'ATTENZIONE: La password o la email inserita non è corretta!';
-          }
-          else if ($password == $row["password"] || $email == $row["email_t"]){
-				$_SESSION['email']=$email;
-				$_SESSION['pass']=$password;
-				$_SESSION['idT']=$row['codice'];  
-				echo 'Accesso consentito area riservata (TEAM)';
-				header("location: http://localhost//Ingegneria/Team/index.php");
-          }
-      
+    if ($email == $adminEmail) {
+        if ($password == $adminPassword) {
+            echo 'Accesso consentito alla sezione riservata';
+            echo '<script>window.location.href = "index.php";</script>';
+            exit;
+        } else {
+            echo 'Accesso negato alla sezione riservata. La password è errata!';
         }
-}
+    } else {
+        // Connessione Database
+        $dbPassword = $config['DB_PSW'];
+        $conn = mysqli_connect("localhost", "SSE24", $dbPassword, "civicsense") or die("Connessione non riuscita");
+
+        $sql = "SELECT * FROM team";
+        $result = mysqli_query($conn, $sql);
+
+        if (mysqli_num_rows($result) > 0) {
+            $authenticated = false;
+            while ($row = mysqli_fetch_assoc($result)) {
+                if ($email == $row["email_t"] && $password == $row["password"]) {
+                    $_SESSION['email'] = $email;
+                    $_SESSION['pass'] = $password;
+                    $_SESSION['idT'] = $row['codice'];
+                    echo 'Accesso consentito area riservata (TEAM)';
+                    header("Location: http://localhost/Ingegneria/Team/index.php");
+                    $authenticated = true;
+                    exit;
+                }
+            }
+            if (!$authenticated) {
+                echo 'ATTENZIONE: La password o la email inserita non è corretta!';
+            }
+        } else {
+            echo 'Non esistono utenti con questa email';
+        }
+        mysqli_close($conn);
     }
-  }
+} else {
+    echo 'Non esistono;';
+}
 ?>
