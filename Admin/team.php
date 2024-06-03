@@ -10,19 +10,31 @@
   <meta name="author" content="">
 
   <title>SB Admin - Tables</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js" integrity="sha512-0QbL0ph8Tc8g5bLhfVzSqxe9GERORsKhIn1IrpxDAgUsbBGz/V7iSav2zzW325XGd1OMLdL4UiqRJj702IeqnQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Page level plugin JavaScript-->
+    <script src="vendor/chart.js/Chart.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.min.js"></script>
+    <link href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.min.css">
 
   <!-- Bootstrap core CSS-->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
   <!-- Page level plugin CSS-->
-  <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
+          <!-- Custom scripts for all pages-->
+          <script src="js/sb-admin.min.js"></script>
 
+          <!-- Demo scripts for this page-->
+          <script src="js/demo/datatables-demo.js"></script>
 
 
 </head>
@@ -138,7 +150,6 @@
         Tabella team
       </div>
       <div class="card-body">
-
         <div class="table-responsive" style="overflow-x: scroll;">
           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
@@ -148,12 +159,8 @@
                 <th>COMPONENTI</th>
               </tr>
             </thead>
-
             <?php include ("php/team.php"); ?>
-
-
           </table>
-
 
           <br><br><br>
 
@@ -168,6 +175,8 @@
 
           <br><br><br>
           <!-- Tabella -->
+        <div class="card-body">
+
           <div class="table-responsive" style="overflow-x: scroll; ">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
@@ -183,7 +192,7 @@
 
 
             </table>
-
+        </div>
 
             <!-- MODIFICA TEAM -->
 
@@ -263,11 +272,6 @@
 
 
             <?php
-
-
-
-
-
             # ---INSERIMENTO DA FORM ---
             
             #salvo i nomi (name) dei form in una variabile php, richiamando i valori dal form con _POST (se nel fotm era 'method=get' diventava $_GET)
@@ -314,34 +318,7 @@ function sanitaze($string,$conn){
 }
             ?>
 
-          </div>
-
-          <!-- Bootstrap core JavaScript-->
-          <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-          <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-          <!-- Core plugin JavaScript-->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js" integrity="sha512-0QbL0ph8Tc8g5bLhfVzSqxe9GERORsKhIn1IrpxDAgUsbBGz/V7iSav2zzW325XGd1OMLdL4UiqRJj702IeqnQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-          <!-- Page level plugin JavaScript-->
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"></script>
-          <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
-
-          <!-- Custom scripts for all pages-->
-          <script src="js/sb-admin.min.js"></script>
-
-          <!-- Demo scripts for this page-->
-          <script src="js/demo/datatables-demo.js"></script>
-
-
-
-
-
-
-
-
-
-
-
+    </div>
 
 </body>
 
