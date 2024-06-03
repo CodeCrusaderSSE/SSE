@@ -279,6 +279,8 @@
             $numeri = (isset($_POST['numero'])) ? $_POST['numero'] : null;
             $pass = (isset($_POST['password'])) ? $_POST['password'] : null;
 
+            $nomi=sanitaze($nomi)
+
             $conn = mysqli_connect("localhost", "root", "", "civicsense") or die("Connessione non riuscita");
 
             if (isset($_POST['submit3'])) {
@@ -298,7 +300,12 @@
                 echo ("<p> <center> <font color=black font face='Courier'>Compila tutti i campi.</p></b></center>");
               }
             }
-
+function sanitaze($string){
+  $string=stripslashes($string);
+  $string=mysqli_real_escape_string($string);
+  $string=htmlspecialchars($string)
+  return $string
+}
             ?>
 
           </div>

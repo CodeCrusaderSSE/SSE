@@ -15,9 +15,9 @@ if (mysqli_num_rows($quer) > 0) {
                 <td>".$row['via']." <br></td> 
                 
               <td>".$row['gravita']."<br></td>
-			  
+
 			    <td>".$row['tipo']."<br></td>
-               
+
           </tr> ";
 }
 }

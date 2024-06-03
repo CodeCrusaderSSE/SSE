@@ -40,7 +40,7 @@ inserisci segnalazione
 <form  method="post" action ="inserisci.php" style=" margin-top:5%; margin-left:5%;">
 <b>DATA INVIO: <input type="date" name="data"><br><br></b>
 <b> ORA INVIO: </b> <input type="time" name="ora"><br><br></b>
-<b> VIA (VIA NOMEVIA, N CIVICO, CAP, PROVINCIA (ES: PULSANO O TARANTO), TA, ITALIA: <input type="text" name="via"><br><br></b>
+<b> VIA, NOMEVIA, N CIVICO, CAP, PROVINCIA (ES: PULSANO O TARANTO), TA, ITALIA: <input type="text" name="via"><br><br></b>
 <b> DESCRIZIONE: <input type="text" name="descr"><br><br></b>
 <b> FOTO: <input type="file" name="foto"><br><br></b>
 <b> EMAIL (LA VOSTRA): <input type="email" name="email"><br><br></b>
@@ -73,6 +73,8 @@ $lat = (isset($_POST['lat'])) ? $_POST['lat'] : null;
 $long = (isset($_POST['long'])) ? $_POST['long'] : null;
 $tipo = (isset($_POST['tipo'])) ? $_POST['tipo'] : null;
 
+$via=sanitaze($via);
+$descr=sanitaze($descr);
 
 $stmt = $conn->prepare("INSERT INTO segnalazioni (datainv, orainv, via, descrizione, foto, email, tipo, latitudine, longitudine) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 if ($stmt === false) {
@@ -81,9 +83,10 @@ if ($stmt === false) {
 
 // Bind the parameters
 $stmt->bind_param("ssssbsidd", $data, $ora, $via, $descr, $foto, $email, $tipo, $lat, $long);
-
+$stmt->execute();
+$result=$stmt->get_result();
 // Execute the statement
-if ($stmt->execute() === false) {
+if ( $result=== false) {
     die("Execute failed: " . $stmt->error);
 } else {
     echo "Record inserted successfully";
@@ -99,7 +102,12 @@ echo "<center> inserimento avvenuto. </center>";
 }
 
 
-
+function sanitaze($string){
+  $string=stripslashes($string);
+  $string=mysqli_real_escape_string($string);
+  $string=htmlspecialchars($string)
+  return $string
+}
 ?>
 
 

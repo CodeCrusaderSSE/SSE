@@ -6,8 +6,7 @@
   $stmt = $conn->prepare("SELECT * FROM segnalazioni WHERE tipo = '2' ");
   $stmt->execute();
   $result = $stmt->get_result();
-
-
+  
     while($row = mysqli_fetch_assoc($result)) {
         echo "
     <tr>

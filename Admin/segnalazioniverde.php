@@ -161,7 +161,7 @@
         zoom:18,
         center:location
       });
-      <?php 
+      <?php
         $conn = mysqli_connect("localhost","root","","civicsense") or die("Connessione fallita");
         $sql = "SELECT * FROM segnalazioni where tipo = '1' ";
         $result = mysqli_query($conn,$sql);
