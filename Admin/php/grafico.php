@@ -18,7 +18,9 @@ var chart = AmCharts.makeChart("chartdiv", {
 	
 	<?php 
 	
-$conn = mysqli_connect("localhost", "root","","civicsense") or die ("Connessione non riuscita"); 
+$config = include('php/config.php');
+$psw = $config['DB_PSW'];
+$conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessione non riuscita"); 
  
 
 $quer = mysqli_query ($conn,"Select COUNT(*) AS cont
@@ -50,7 +52,9 @@ if (mysqli_num_rows($quer) > 0) {
     "value1": 
 	<?php 
 	 
-$conn = mysqli_connect("localhost", "root","","civicsense") or die ("Connessione non riuscita"); 
+$config = include('php/config.php');
+$psw = $config['DB_PSW'];
+$conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessione non riuscita"); 
 
 $quer = mysqli_query ($conn,"Select COUNT(*) AS cont
 FROM segnalazioni
@@ -75,7 +79,9 @@ if (mysqli_num_rows($quer) > 0) {
     "value1": 
 	<?php 
 	
-$conn = mysqli_connect("localhost", "root","","civicsense") or die ("Connessione non riuscita"); 
+$config = include('php/config.php');
+$psw = $config['DB_PSW'];
+$conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessione non riuscita"); 
  
 
 $quer = mysqli_query ($conn,"Select COUNT(*) AS cont
@@ -100,7 +106,9 @@ if (mysqli_num_rows($quer) > 0) {
     "value1": 
 	<?php 
 	
-$conn = mysqli_connect("localhost", "root","","civicsense") or die ("Connessione non riuscita"); 
+$config = include('php/config.php');
+$psw = $config['DB_PSW'];
+$conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessione non riuscita"); 
  
 
 $quer = mysqli_query ($conn,"Select COUNT(*) AS cont
@@ -125,7 +133,9 @@ if (mysqli_num_rows($quer) > 0) {
     "value1": 
 	<?php 
 	
-$conn = mysqli_connect("localhost", "root","","civicsense") or die ("Connessione non riuscita"); 
+$config = include('php/config.php');
+$psw = $config['DB_PSW'];
+$conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessione non riuscita"); 
  
 
 $quer = mysqli_query ($conn,"Select COUNT(*) AS cont
@@ -150,7 +160,9 @@ if (mysqli_num_rows($quer) > 0) {
     "value1": 
 	<?php 
 	
-$conn = mysqli_connect("localhost", "root","","civicsense") or die ("Connessione non riuscita"); 
+$config = include('php/config.php');
+$psw = $config['DB_PSW'];
+$conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessione non riuscita"); 
  
 
 $quer = mysqli_query ($conn,"Select COUNT(*) AS cont
@@ -175,7 +187,9 @@ if (mysqli_num_rows($quer) > 0) {
     "value1": 
 	<?php 
 	
-$conn = mysqli_connect("localhost", "root","","civicsense") or die ("Connessione non riuscita"); 
+$config = include('php/config.php');
+$psw = $config['DB_PSW'];
+$conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessione non riuscita"); 
  
 
 $quer = mysqli_query ($conn,"Select COUNT(*) AS cont
@@ -200,7 +214,9 @@ if (mysqli_num_rows($quer) > 0) {
     "value1": 
 	<?php 
 	
-$conn = mysqli_connect("localhost", "root","","civicsense") or die ("Connessione non riuscita"); 
+$config = include('php/config.php');
+$psw = $config['DB_PSW'];
+$conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessione non riuscita"); 
  
 
 $quer = mysqli_query ($conn,"Select COUNT(*) AS cont
@@ -225,7 +241,9 @@ if (mysqli_num_rows($quer) > 0) {
     "value1": 
 	<?php 
 	
-$conn = mysqli_connect("localhost", "root","","civicsense") or die ("Connessione non riuscita"); 
+$config = include('php/config.php');
+$psw = $config['DB_PSW'];
+$conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessione non riuscita"); 
  
 
 $quer = mysqli_query ($conn,"Select COUNT(*) AS cont
@@ -250,7 +268,9 @@ if (mysqli_num_rows($quer) > 0) {
     "value1": 
 	<?php 
 	
-$conn = mysqli_connect("localhost", "root","","civicsense") or die ("Connessione non riuscita"); 
+$config = include('php/config.php');
+$psw = $config['DB_PSW'];
+$conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessione non riuscita"); 
  
 
 $quer = mysqli_query ($conn,"Select COUNT(*) AS cont
@@ -275,7 +295,9 @@ if (mysqli_num_rows($quer) > 0) {
     "value1": 
 	<?php 
 	
-$conn = mysqli_connect("localhost", "root","","civicsense") or die ("Connessione non riuscita"); 
+$config = include('php/config.php');
+$psw = $config['DB_PSW'];
+$conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessione non riuscita"); 
  
 
 $quer = mysqli_query ($conn,"Select COUNT(*) AS cont
@@ -300,7 +322,9 @@ if (mysqli_num_rows($quer) > 0) {
     "value1": 
 	<?php 
 	
-$conn = mysqli_connect("localhost", "root","","civicsense") or die ("Connessione non riuscita"); 
+$config = include('php/config.php');
+$psw = $config['DB_PSW'];
+$conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessione non riuscita"); 
  
 
 $quer = mysqli_query ($conn,"Select COUNT(*) AS cont

@@ -1,9 +1,11 @@
 <?php
-	$conn = new MySQLi("localhost","root","","civicsense");
+	
 
 	$upload_path = 'jpeg/';
 
-    $conn = mysqli_connect("localhost", "root","","civicsense") or die ("Connessione non riuscita");
+    $config = include('php/config.php');
+$psw = $config['DB_PSW'];
+$conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessione non riuscita");
 
 // Check connection
 if ($conn->connect_error) {

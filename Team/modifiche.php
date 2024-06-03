@@ -14,7 +14,9 @@ if (isset($_POST['id'])&& isset($_POST['stato'])) {
 	$email=$_SESSION['email'];
 	$pass=$_SESSION['pass'];
 		
-	$conn = mysqli_connect ("localhost", "root", "","civicsense") or die ("Connessione non riuscita"); 
+	$config = include('php/config.php');
+$psw = $config['DB_PSW'];
+$conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessione non riuscita"); 
 	$stmt = $conn->prepare("SELECT * FROM segnalazioni WHERE id = ?");
 	$stmt->bind_param("i",$ids);
 	$stmt->execute();

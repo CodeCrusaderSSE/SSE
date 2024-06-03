@@ -209,7 +209,9 @@
 
                 <?php
 
-                $conn = mysqli_connect("localhost", "root", "", "civicsense") or die("Connessione non riuscita");
+                $config = include('php/config.php');
+$psw = $config['DB_PSW'];
+$conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessione non riuscita");
 
                 $selezione = mysqli_query($conn, "SELECT email_t, codice FROM team") or die(mysqli_error());
 
@@ -283,9 +285,11 @@
             $numeri = (isset($_POST['numero'])) ? $_POST['numero'] : null;
             $pass = (isset($_POST['password'])) ? $_POST['password'] : null;
 
-            $nomi=sanitaze($conn,$nomi);
+            $nomi=sanitaze($nomi,$conn);
 
-            $conn = mysqli_connect("localhost", "root", "", "civicsense") or die("Connessione non riuscita");
+            $config = include('php/config.php');
+$psw = $config['DB_PSW'];
+$conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessione non riuscita");
 
             if (isset($_POST['submit3'])) {
               if ($email && $nomi && $numeri && $pass !== null) {
@@ -316,7 +320,7 @@ function sanitaze($string,$conn){
   $string=htmlspecialchars($string);
   return $string;
 }
-            ?>
+?>
 
     </div>
 

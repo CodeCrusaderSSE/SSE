@@ -7,7 +7,9 @@ if (isset($_POST['submit'])){
 
 if ($id && $stato !== null) {
 
- $conn = mysqli_connect ("localhost", "root", "","civicsense") or die ("Connessione non riuscita"); 
+ $config = include('php/config.php');
+$psw = $config['DB_PSW'];
+$conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessione non riuscita"); 
  $stmt = $conn->prepare("UPDATE segnalazioni SET stato = ? WHERE id = ?");
  $stmt->bind_param("si",$stato,$id);
  $stmt->execute();

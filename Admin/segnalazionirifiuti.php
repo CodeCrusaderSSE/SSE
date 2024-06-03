@@ -175,7 +175,9 @@
         center:location
       });
       <?php 
-        $conn = mysqli_connect("localhost","root","","civicsense") or die("Connessione fallita");
+        $config = include('php/config.php');
+$psw = $config['DB_PSW'];
+$conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessione non riuscita");
         $sql = "SELECT * FROM segnalazioni where tipo = '2' ";
         $result = mysqli_query($conn,$sql);
         if($result){
@@ -262,7 +264,9 @@ Modifica gravità di una segnalazione</div>
 	
 <?php
 
-$conn = mysqli_connect ("localhost", "root", "","civicsense") or die ("Connessione non riuscita"); 
+$config = include('php/config.php');
+$psw = $config['DB_PSW'];
+$conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessione non riuscita"); 
 
 $idt = isset($_POST['idt']) ? $_POST['idt'] : null;
 $grav = isset($_POST['gravit']) ? $_POST['gravit'] : null;

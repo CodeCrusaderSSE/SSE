@@ -5,7 +5,9 @@ if (isset($_SESSION['idT'])) {
 
 
   $team = (isset($_POST['team'])) ? $_POST['team'] : null;
-  $conn = mysqli_connect("localhost", "root", "", "civicsense") or die("Connessione non riuscita");
+  $config = include('php/config.php');
+$psw = $config['DB_PSW'];
+$conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessione non riuscita");
   $stmt = $conn->prepare("SELECT * FROM segnalazioni WHERE stato  <> 'Risolto' AND team = ? ");
   $stmt->bind_param("i", $_SESSION['idT']);
   $stmt->execute();

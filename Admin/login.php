@@ -86,7 +86,9 @@
     else
     {
       //Connessione Database
-     $conn = mysqli_connect("localhost", "root","","civicsense") or die ("Connessione non riuscita"); #connessione a mysql, la pass non la ho xk è scaricato automaticamente
+     $config = include('php/config.php');
+$psw = $config['DB_PSW'];
+$conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessione non riuscita"); #connessione a mysql, la pass non la ho xk è scaricato automaticamente
 
   #connessione al db
 

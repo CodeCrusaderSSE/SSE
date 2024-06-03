@@ -105,7 +105,9 @@
         center:location
       });
       <?php 
-        $conn = mysqli_connect("localhost","root","","civicsense") or die("Connessione fallita");
+        $config = include('php/config.php');
+$psw = $config['DB_PSW'];
+$conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessione non riuscita");
 
         if(isset($_SESSION['idT'])){
           $stmt = $conn->prepare("SELECT * FROM segnalazioni WHERE team = ?");

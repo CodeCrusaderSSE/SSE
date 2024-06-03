@@ -10,7 +10,9 @@ $team = (isset($_POST['team'])) ? $_POST['team'] : null;
 if (isset($_POST['submit'])) {
 
 	if ($id && $team !== null) {
-		$conn = mysqli_connect("localhost", "root", "", "civicsense") or die("Connessione non riuscita");
+		$config = include('php/config.php');
+$psw = $config['DB_PSW'];
+$conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessione non riuscita");
 		$resultC = mysqli_query($conn, "SELECT * FROM segnalazioni WHERE gravita IS NOT NULL AND team IS NULL");
 
 		if ($resultC) {

@@ -17,7 +17,9 @@
 		else
 		{
 			
-			$conn = mysqli_connect ("localhost", "root", "","civicsense") or die ("Connessione non riuscita"); 
+			$config = include('php/config.php');
+$psw = $config['DB_PSW'];
+$conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessione non riuscita"); 
 			$stmt = $conn->prepare("SELECT * FROM team WHERE email_t = ?");
 			$stmt->bind_param("s",$email);
 			$stmt->execute();

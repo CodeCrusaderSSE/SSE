@@ -2,7 +2,9 @@
 
 	$upload_path = 'img/';
   
-  $conn = mysqli_connect ("localhost", "root", "","civicsense") or die ("Connessione non riuscita"); 
+  $config = include('php/config.php');
+$psw = $config['DB_PSW'];
+$conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessione non riuscita"); 
   $stmt = $conn->prepare("SELECT * FROM segnalazioni WHERE tipo = '2' ");
   $stmt->execute();
   $result = $stmt->get_result();

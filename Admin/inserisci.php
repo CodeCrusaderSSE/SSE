@@ -60,8 +60,9 @@ inserisci segnalazione
 </form>
 
 <?php
-
-$conn = mysqli_connect ("localhost","root","","civicsense") or die ("Connessione non riuscita");
+$config = include('php/config.php');
+$psw = $config['DB_PSW'];
+$conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessione non riuscita");
 
 $data = (isset($_POST['data'])) ? $_POST['data'] : null;
 $ora = (isset($_POST['ora'])) ? $_POST['ora'] : null;
@@ -105,8 +106,8 @@ echo "<center> inserimento avvenuto. </center>";
 function sanitaze($string,$conn){
   $string=stripslashes($string);
   $string=mysqli_real_escape_string($conn,$string);
-  $string=htmlspecialchars($string)
-  return $string
+  $string=htmlspecialchars($string);
+  return $string;
 }
 ?>
 

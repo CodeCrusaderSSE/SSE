@@ -7,14 +7,16 @@ session_start();
 
 require ('C:\xampp\htdocs\Ingegneria\Team\phpmailer\src\PHPMailer.php');
 include ('C:\xampp\htdocs\Ingegneria\Team\phpmailer\src\SMTP.php');
-$conn = new mysqli ("localhost", "root", "","civicsense") or die ("Connessione non riuscita"); 
+$config = include('php/config.php');
+$psw = $config['DB_PSW'];
+$conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessione non riuscita"); 
 
 if (isset($_POST['id'])&& isset($_POST['stato'])) {
 	$idS = $_POST['id'];
 	$stato = $_POST['stato'];
 	$email=$_SESSION['email'];
 	$pass=$_SESSION['pass'];
-	$stmt=$conn->prepare("SELECT * FROM segnalazioni WHERE id =?")
+	$stmt=$conn->prepare("SELECT * FROM segnalazioni WHERE id =?");
 	$stmt->bind_param("i", $idS);
 	$stmt->execute();
 
@@ -58,7 +60,7 @@ if (isset($_POST['id'])&& isset($_POST['stato'])) {
 		//da team a ente e utente
 		else if($row['stato']=="In risoluzione" && $stato=="Risolto"){
 			$stmt3=$conn->prepare("UPDATE segnalazioni SET stato = ? WHERE id = ?");
-			$stmt3->bind_param("si",$stato,$idS)
+			$stmt3->bind_param("si",$stato,$idS);
 			$stmt3->execute();
 			$result1 = $stmt3->get_result();
 			if($result1){
