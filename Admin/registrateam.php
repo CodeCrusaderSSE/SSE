@@ -104,7 +104,7 @@ if ($email !== null && $pass !== null) {
 
 // Close the connection
 $conn->close();
-if($query){
+if($result){
 	echo("<br><b><br><p> <center> <font color=white font face='Courier'> Password registrata! Clicca su <a href='login.php'> Login </a> per accedere. </b></center></p><br><br> ");
 } 
 
