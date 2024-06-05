@@ -10,16 +10,21 @@
   <meta name="author" content="">
 
   <title>SB Admin - Tables</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Core plugin JavaScript-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js" integrity="sha512-0QbL0ph8Tc8g5bLhfVzSqxe9GERORsKhIn1IrpxDAgUsbBGz/V7iSav2zzW325XGd1OMLdL4UiqRJj702IeqnQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- Page level plugin JavaScript-->
-    <script src="vendor/chart.js/Chart.min.js"></script>
-    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.min.js"></script>
-    <link href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"
+    integrity="sha512-0QbL0ph8Tc8g5bLhfVzSqxe9GERORsKhIn1IrpxDAgUsbBGz/V7iSav2zzW325XGd1OMLdL4UiqRJj702IeqnQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- Page level plugin JavaScript-->
+  <script src="vendor/chart.js/Chart.min.js"></script>
+  <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.min.js"></script>
+  <link href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.min.css">
 
   <!-- Bootstrap core CSS-->
 
@@ -30,11 +35,11 @@
 
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
-          <!-- Custom scripts for all pages-->
-          <script src="js/sb-admin.min.js"></script>
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin.min.js"></script>
 
-          <!-- Demo scripts for this page-->
-          <script src="js/demo/datatables-demo.js"></script>
+  <!-- Demo scripts for this page-->
+  <script src="js/demo/datatables-demo.js"></script>
 
 
 </head>
@@ -175,24 +180,24 @@
 
           <br><br><br>
           <!-- Tabella -->
-        <div class="card-body">
+          <div class="card-body">
 
-          <div class="table-responsive" style="overflow-x: scroll; ">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-              <thead>
-                <tr>
-                  <th>CODICE SEGNALAZIONE</th>
-                  <th>VIA</th>
-                  <th>GRAVITA'</th>
-                  <th>TIPO</th>
-                </tr>
-              </thead>
+            <div class="table-responsive" style="overflow-x: scroll; ">
+              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>CODICE SEGNALAZIONE</th>
+                    <th>VIA</th>
+                    <th>GRAVITA'</th>
+                    <th>TIPO</th>
+                  </tr>
+                </thead>
 
-              <?php include ("php/team2.php"); ?>
+                <?php include ("php/team2.php"); ?>
 
 
-            </table>
-        </div>
+              </table>
+            </div>
 
             <!-- MODIFICA TEAM -->
 
@@ -209,9 +214,9 @@
 
                 <?php
 
-                $config = include('php/config.php');
-$psw = $config['DB_PSW'];
-$conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessione non riuscita");
+                $config = include ('php/config.php');
+                $psw = $config['DB_PSW'];
+                $conn = mysqli_connect("localhost", "SSE24", $psw, "civicsense") or die("Connessione non riuscita");
 
                 $selezione = mysqli_query($conn, "SELECT email_t, codice FROM team") or die(mysqli_error());
 
@@ -264,10 +269,10 @@ $conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessi
             </div>
 
             <form method="post" action="team.php" style=" margin-top:5%; margin-left:5%">
-              <b>E-MAIL TEAM:</b> <input type="email" name="email"><br><br>
-              <b>NOMI E COGNOMI DEI COMPONENTI:</b> <input type="text" name="nomi"><br><br>
-              <b>NUMERO DI COMPONENTI: </b> <input type="number" name="numero"><br><br>
-              <b>PASSWORD:</b> <input type="password" name="password"><br>
+              <b>E-MAIL TEAM:</b> <input type="email" name="email" required="true"><br><br>
+              <b>NOMI E COGNOMI DEI COMPONENTI:</b> <input type="text" name="nomi" required="true"><br><br>
+              <b>NUMERO DI COMPONENTI: </b> <input type="number" name="numero" required="true"><br><br>
+              <!-- <b>PASSWORD:</b> <input type="password" name="password"><br> -->
 
               <input type="submit" name="submit3" class="btn btn-primary btn-block" style="width:15%; margin-top:5%;">
             </form>
@@ -277,52 +282,51 @@ $conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessi
             # ---INSERIMENTO DA FORM ---
             
             #salvo i nomi (name) dei form in una variabile php, richiamando i valori dal form con _POST (se nel fotm era 'method=get' diventava $_GET)
-            
-
-
             $email = (isset($_POST['email'])) ? $_POST['email'] : null;
             $nomi = (isset($_POST['nomi'])) ? $_POST['nomi'] : null;
             $numeri = (isset($_POST['numero'])) ? $_POST['numero'] : null;
-            $pass = (isset($_POST['password'])) ? $_POST['password'] : null;
+            /* $pass = (isset($_POST['password'])) ? $_POST['password'] : null; */
 
-            $nomi=sanitaze($nomi,$conn);
 
-            $config = include('php/config.php');
-$psw = $config['DB_PSW'];
-$conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessione non riuscita");
 
-            if (isset($_POST['submit3'])) {
-              if ($email && $nomi && $numeri && $pass !== null) {
-                #inserisco i valori salvati dal form nella query di inserimento
-            
-                $stmt = $conn->prepare("INSERT INTO team (email_t, npersone, nomi, password) VALUES (?,?,?,?)");
+            $config = include ('php/config.php');
+            $psw = $config['DB_PSW'];
+            $conn = mysqli_connect("localhost", "SSE24", $psw, "civicsense") or die("Connessione non riuscita");
+            $nomi = sanitaze($nomi, $conn);
 
-                $stmt->bind_param("siss", $email, $numeri, $nomi, $pass);
-                $stmt->execute();
-                $result = $stmt->get_result();
-                $stmt->close();
-                if ($result) {
-                  echo ("<b><br><p> <center> <font color=black font face='Courier'> Inserimento avvenuto correttamente! Ricarica la pagina per vedere la tabella aggiornata!</p></b></center>");
-                }
-              } else {
-                echo ("<p> <center> <font color=black font face='Courier'>Compila tutti i campi.</p></b></center>");
+            if ($email && $nomi && $numeri !== null) {
+              #inserisco i valori salvati dal form nella query di inserimento
+              $stmt = $conn->prepare("INSERT INTO team (email_t, npersone, nomi, password) VALUES (?,?,?,?)");
+              $stmt->bind_param("siss", $email, $numeri, $nomi, $email);
+              $result = $stmt->execute();
+
+              if ($result) {
+                echo "<p>Team registrato con successo. La password è <b>$email</b></p>";
               }
+            } else {
+              echo "<p>Team non registrato.</p>";
             }
 
 
-/* Able to sanitaze the input string by the user.
-Params:
-$string = The input string to sanitaze.
-$conn = The connection to the database. */
-function sanitaze($string,$conn){
-  $string=stripslashes($string);
-  $string=mysqli_real_escape_string($conn,$string);
-  $string=htmlspecialchars($string);
-  return $string;
-}
-?>
+            #}
+            
 
-    </div>
+            /* Able to sanitaze the input string by the user.
+            Params:
+            $string = The input string to sanitaze.
+            $conn = The connection to the database. */
+            function sanitaze($string, $conn)
+            {
+              $string = stripslashes($string);
+              $string = mysqli_real_escape_string($conn, $string);
+              $string = htmlspecialchars($string);
+              return $string;
+            }
+
+
+            ?>
+
+          </div>
 
 </body>
 
