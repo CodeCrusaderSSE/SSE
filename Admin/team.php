@@ -112,6 +112,12 @@
           <span>Home</span>
         </a>
       </li>
+              <li class="nav-item active">
+          <a class="nav-link" href="dashboard.php">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
 
 
       <li class="nav-item dropdown">

@@ -33,7 +33,7 @@
       <div class="card card-login mx-auto mt-5">
         <div class="card-header">Login</div>
         <div class="card-body">
-  <form action="#" method="POST">
+  <form action="login.php" method="POST">
             <div class="form-group">
               <div class="form-label-group">
                 <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required="required" autofocus="autofocus">
@@ -66,11 +66,13 @@
 
 
     <?php
-session_start(); // Ensure session is started
+ // Ensure session is started
 
 // Load the configuration settings
 $config = include('php/config.php');
-
+ // Connessione Database
+        $dbPassword = $config['DB_PSW'];
+        $conn = mysqli_connect("localhost", "SSE24", $dbPassword, "civicsense") or die("Connessione non riuscita");
 // Recupero dati
 if (isset($_POST['email']) && isset($_POST['password'])) {
     $email = $_POST['email'];
@@ -82,6 +84,14 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 
     if ($email == $adminEmail) {
         if ($password == $adminPassword) {
+              $query="SELECT id FROM admin WHERE email='$adminEmail' AND password='$adminPassword'";
+              $result=mysqli_query($conn,$query);
+              $row = $result->fetch_assoc();
+              $adminId = $row['id'];
+              $_SESSION['idA']=$row['id'];
+              $currentDateTime = date("Y-m-d H:i:s", time());
+              $query2="INSERT INTO logging VALUES ('$adminId','admin','$currentDateTime')";
+              $result2=mysqli_query($conn,$query2);
             echo 'Accesso consentito alla sezione riservata';
             echo '<script>window.location.href = "index.php";</script>';
             exit;
@@ -89,9 +99,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
             echo 'Accesso negato alla sezione riservata. La password è errata!';
         }
     } else {
-        // Connessione Database
-        $dbPassword = $config['DB_PSW'];
-        $conn = mysqli_connect("localhost", "SSE24", $dbPassword, "civicsense") or die("Connessione non riuscita");
+
 
         $sql = "SELECT * FROM team";
         $result = mysqli_query($conn, $sql);
@@ -103,6 +111,10 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
                     $_SESSION['email'] = $email;
                     $_SESSION['pass'] = $password;
                     $_SESSION['idT'] = $row['codice'];
+                    $idT=$_SESSION['idT'];
+                    $currentDateTime = date("Y-m-d H:i:s", time());
+                    $query2="INSERT INTO logging VALUES ('$idT','team','$currentDateTime')";
+                    $result2=mysqli_query($conn,$query2);
                     echo 'Accesso consentito area riservata (TEAM)';
                     header("Location: http://localhost/Ingegneria/Team/index.php");
                     $authenticated = true;
