@@ -115,7 +115,7 @@
                 <label for="email">Team Email:</label>
                 <input type="email" class="form-control mb-3" id="email" name="email" required="true">
                 <label for="oldPassword">Vecchia Password:</label>
-                <input type="oldPassword" class="form-control mb-3" id="oldPassword" name="oldPassword" required="true">
+                <input type="password" class="form-control mb-3" id="oldPassword" name="oldPassword" required="true">
                 <label for="password">Nuova Password:</label>
                 <input type="password" class="form-control" id="password" name="password" required="true"
                   onkeyup="checkPasswordStrength(); checkPasswordMatch();">

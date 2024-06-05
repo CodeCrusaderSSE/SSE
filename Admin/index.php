@@ -147,7 +147,7 @@
             <img class="card-img-top" src="img/dashboard.png" alt="">
             <div class="card-body">
               <h4 class="mr-5" style="margin-top: -30px;"> <br>
-                <a href="dashboard.php" style="color:black"> Segnalazioni <i class="fas fa-angle-right" style="margin-left:3px;"><i class="fas fa-angle-right" style="margin-left:3px;"></i></i></a>
+                <a href="dashboard.php" style="color:black"> Dashboard <i class="fas fa-angle-right" style="margin-left:3px;"><i class="fas fa-angle-right" style="margin-left:3px;"></i></i></a>
               </h4>
             </div>
           </div>
