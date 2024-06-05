@@ -163,7 +163,6 @@ $conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessi
 
 
 			<br><br><br>
-			
 			 <div class="card-header">
               <i class="fas fa-table"></i>
              Tabella Segnalazioni da risolvere</div>
@@ -185,10 +184,7 @@ $conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessi
 					            <th>GRAVITA'</th>
                     </tr>
                   </thead>
-
 <?php include("php/segnalazione.php"); ?>
-
-
 </table>
 
 
@@ -219,8 +215,25 @@ Modifica stato di una segnalazione</div>
     </form>
 
 <br><br><br>
-
-
+<div class="card mb-3">
+      <div class="card-header">
+        <i class="fas fa-table"></i>
+        Informazioni
+      </div>
+      <div class="card-body">
+        <div class="table-responsive" style="overflow-x: scroll;">
+          <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>CODICE TEAM</th>
+                <th>E-MAIL</th>
+                <th>NUMERO MEMBRI</th>
+                <th>NOME MEMBRI</th>
+                <th>DATA LOGIN</th>
+              </tr>
+            </thead>
+            <?php include("php/dashboardTeam.php")?>
+  </table>
 <br><br>
 </div></div></div>
 
@@ -239,18 +252,6 @@ Modifica stato di una segnalazione</div>
 
     <!-- Demo scripts for this page-->
     <script src="js/demo/datatables-demo.js"></script>
-
-	
-	
-	
-
-
-
-	
-	
-	
-	
-	
   </body>
 
 </html>

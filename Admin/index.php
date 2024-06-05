@@ -1,3 +1,4 @@
+<?php session_start()?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -64,6 +65,12 @@
             <span>Home</span>
           </a>
         </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="dashboard.php">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
 
 
    <li class="nav-item dropdown">
@@ -128,6 +135,19 @@
             <div class="card-body">
               <h4 class="mr-5" style="margin-top: -30px;"> <br>
                 <a href="segnalazionii.php" style="color:black"> Segnalazioni <i class="fas fa-angle-right" style="margin-left:3px;"><i class="fas fa-angle-right" style="margin-left:3px;"></i></i></a>
+              </h4>
+            </div>
+          </div>
+        </div>
+    </a>
+    <a href="dashboard.php">
+
+        <div class="col-lg-4 col-sm-6 portfolio-item">
+          <div class="card h-100" style="   ">
+            <img class="card-img-top" src="img/dashboard.png" alt="">
+            <div class="card-body">
+              <h4 class="mr-5" style="margin-top: -30px;"> <br>
+                <a href="dashboard.php" style="color:black"> Segnalazioni <i class="fas fa-angle-right" style="margin-left:3px;"><i class="fas fa-angle-right" style="margin-left:3px;"></i></i></a>
               </h4>
             </div>
           </div>
