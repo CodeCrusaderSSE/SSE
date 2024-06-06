@@ -1,135 +1,139 @@
-<?php session_start()?>
+<?php session_start() ?>
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
+<head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    <title>SB Admin - Tables</title>
+  <title>SB Admin - Tables</title>
 
-    <!-- Bootstrap core CSS-->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap core CSS-->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <!-- Custom fonts for this template-->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
-    <!-- Page level plugin CSS-->
-    <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+  <!-- Page level plugin CSS-->
+  <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
-    <!-- Custom styles for this template-->
-    <link href="css/sb-admin.css" rel="stylesheet">
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin.css" rel="stylesheet">
 
-	<!-- grafico -->
-	   <link rel="stylesheet" href="css/graficostyle.css">
-	   
-	   
-  </head>
+  <!-- grafico -->
+  <link rel="stylesheet" href="css/graficostyle.css">
 
-  <body id="page-top">
 
-    <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+</head>
 
-      <a class="navbar-brand mr-1" href=""> Area riservata</a>
+<body id="page-top">
 
-      
-<!-- INIZIO LOGOUT -->     
+  <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
- <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-    <ul class="navbar-nav ml-auto ml-md-0">
-        <li class="nav-item dropdown no-arrow" >
-           <a class="nav-link dropdown-toggle" href="#" title="Logout"  id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-             <i class="fas fa-user-circle fa-fw"></i>
-           </a>
+    <a class="navbar-brand mr-1" href=""> Area riservata</a>
+
+
+    <!-- INIZIO LOGOUT -->
+
+    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+      <ul class="navbar-nav ml-auto ml-md-0">
+        <li class="nav-item dropdown no-arrow">
+          <a class="nav-link dropdown-toggle" href="#" title="Logout" id="userDropdown" role="button"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-user-circle fa-fw"></i>
+          </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-            <a class="dropdown-item" href="login.html" data-toggle="modal" data-target="#logoutModal" > Logout </a>
+            <a class="dropdown-item" href="login.html" data-toggle="modal" data-target="#logoutModal"> Logout </a>
           </div>
         </li>
-    </ul>
- </form>
-</nav>
+      </ul>
+    </form>
+  </nav>
 
-    <!-- finestra avviso-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Sei sicuro di voler lasciare il sito?</h5>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="modal-body">Clicca "Logout" per uscire dal sito.</div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Annulla</button>
-            <a class="btn btn-primary" href="login.php">Logout</a>
-          </div>
+  <!-- finestra avviso-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Sei sicuro di voler lasciare il sito?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Clicca "Logout" per uscire dal sito.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Annulla</button>
+          <a class="btn btn-primary" href="login.php">Logout</a>
         </div>
       </div>
     </div>
+  </div>
 
-<!-- FINE LOGOUT-->
-
-
-    <div id="wrapper">
-
-          <div class="card mb-3">
-           
-			
-			<!-- MAPPA -->
-	
-  <style>
-    #map{
-      height:500px;
-      width:100%; 
-      margin-left:0%;
-    }
-    *{
-      margin:0;
-      padding:0;
-    }
-  </style>
+  <!-- FINE LOGOUT-->
 
 
-  <div id="map"></div>
-    
-    <script>
-      function initMap(){
-      var location = new google.maps.LatLng(40.382003, 17.367155);
-      var map = new google.maps.Map(document.getElementById("map"),{
-        zoom:18,
-        center:location
-      });
-      <?php 
-        $config = include('php/config.php');
-$psw = $config['DB_PSW'];
-$conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessione non riuscita");
+  <div id="wrapper">
 
-        if(isset($_SESSION['idT'])){
-          $stmt = $conn->prepare("SELECT * FROM segnalazioni WHERE team = ?");
-          $stmt->bind_param("i", $_SESSION['idT']);
-          $stmt->execute();
-          $result = $stmt->get_result();
-          
-          if($result){
-              while($row = $result->fetch_assoc()){
-                  echo "
-                  var location = new google.maps.LatLng(".$row['latitudine'].",".$row['longitudine'].");
+    <div class="card mb-3">
+
+
+      <!-- MAPPA -->
+
+      <style>
+        #map {
+          height: 500px;
+          width: 100%;
+          margin-left: 0%;
+        }
+
+        * {
+          margin: 0;
+          padding: 0;
+        }
+      </style>
+
+
+      <div id="map"></div>
+
+      <script>
+        function initMap() {
+          var location = new google.maps.LatLng(40.382003, 17.367155);
+          var map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 18,
+            center: location
+          });
+          <?php
+          $config = include ('php/config.php');
+          $psw = $config['DB_PSW'];
+          $conn = mysqli_connect("localhost", "SSE24", $psw, "civicsense") or die("Connessione non riuscita");
+
+          if (isset($_SESSION['idT'])) {
+            $stmt = $conn->prepare("SELECT * FROM segnalazioni WHERE team = ?");
+            $stmt->bind_param("i", $_SESSION['idT']);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result) {
+              while ($row = $result->fetch_assoc()) {
+                echo "
+                  var location = new google.maps.LatLng(" . $row['latitudine'] . "," . $row['longitudine'] . ");
                   var marker = new google.maps.Marker({
                       map: map,
                       position: location
-                  }); " ;
+                  }); ";
               }
               $stmt->close();
+            }
+            mysqli_close($conn);
           }
-          mysqli_close($conn);
-      }
-      ?>
-      /*var marker = new google.maps.Marker({
+
+          ?>
+/*var marker = new google.maps.Marker({
               map: map,
               position: location
           });
@@ -138,120 +142,156 @@ $conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessi
         position: location1
       });*/
       
-    }
-    
+      }
     </script>
-    
-  <?php
-      $config = include('config.php');
+
+      <?php
+      $config = include ('config.php');
       $googleMapsApiKey = $config['GOOGLE_MAPS_API_KEY'];
-  ?>
+      ?>
 
-  <script async defer 
-  src="https://maps.googleapis.com/maps/api/js?key=<?php echo $googleMapsApiKey; ?>&callback=initMap">
-    </script>
-  
-
-
-
-			
-			<!-- FINE MAPPA -->
+      <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=<?php echo $googleMapsApiKey; ?>&callback=initMap">
+      </script>
 
 
 
 
 
-
-			<br><br><br>
-			 <div class="card-header">
-              <i class="fas fa-table"></i>
-             Tabella Segnalazioni da risolvere</div>
-			 <br><br>
-            <div class="card-body">
-			 <!-- Tabella -->
-              <div class="table-responsive" style="overflow-x: scroll;" >
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" >
-                  <thead >
-                    <tr>
-                      <th>CODICE SEGNALAZIONE</th>
-                      <th>DATA</th>
-                      <th>ORA</th>
-                      <th>VIA</th>
-                      <th>DESCRIZIONE</th>
-                      <th>FOTO</th>
-					            <th>TIPO</th>
-                      <th>STATO</th>
-					            <th>GRAVITA'</th>
-                    </tr>
-                  </thead>
-<?php include("php/segnalazione.php"); ?>
-</table>
-
-
-
-
-
-
-
-
-	<!-- MODIFICA STATO SEGNALAZIONE -->
-	
-<!-- inserimento da form del codice della segnalazione da modificare -->
-<br><br><br>
-
-<div class="card-header">
-  <i class="fas fa-table"></i>
-Modifica stato di una segnalazione</div>
-
-	<form  method="post" action ="modifiche.php" style=" margin-top:5%; margin-left:5%">
-<b>CODICE SEGNALAZIONE DA MODIFICARE: <input type="text" name="id"><br><br></b>
-<b> INSERISCI LO STATO MODIFICATO: </b> <select class="text" name="stato">
-   
-    <option value="Risolto">Risolto</option>
-    <option value="In risoluzione">In risoluzione</option>
-
-<input type="submit"  class="btn btn-primary btn-block" style="width:15%; margin-top:5%;">
-
-    </form>
-
-<br><br><br>
-<div class="card mb-3">
+      <br><br><br>
       <div class="card-header">
         <i class="fas fa-table"></i>
-        Informazioni
+        Tabella Segnalazioni da risolvere
       </div>
+      <br><br>
       <div class="card-body">
+        <!-- Tabella -->
         <div class="table-responsive" style="overflow-x: scroll;">
-          <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
               <tr>
-                <th>CODICE TEAM</th>
-                <th>E-MAIL</th>
-                <th>NUMERO MEMBRI</th>
-                <th>NOME MEMBRI</th>
-                <th>DATA LOGIN</th>
-              </tr>
-            </thead>
-            <?php include("php/dashboardTeam.php")?>
-  </table>
-<br><br>
-</div></div></div>
+                <th>CODICE SEGNALAZIONE</th>
+                <th>DATA</th>
+                <th>ORA</th>
+                <th>VIA</th>
+                <th>DESCRIZIONE</th>
+                                    <th>FOTO</th>
+                                    <th>TIPO</th>
+                                    <th>STATO</th>
+                                    <th>GRAVITA'</th>
+                                  </tr>
+                                </thead>
+                                <?php include ("php/segnalazione.php"); ?>
+                              </table>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js" integrity="sha512-0QbL0ph8Tc8g5bLhfVzSqxe9GERORsKhIn1IrpxDAgUsbBGz/V7iSav2zzW325XGd1OMLdL4UiqRJj702IeqnQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- Page level plugin JavaScript--><script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js" integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin.min.js"></script>
 
-    <!-- Demo scripts for this page-->
-    <script src="js/demo/datatables-demo.js"></script>
-  </body>
+
+
+
+          <!-- MODIFICA STATO SEGNALAZIONE -->
+
+          <!-- inserimento da form del codice della segnalazione da modificare -->
+          <br><br><br>
+
+          <div class=lect <i class="fas fa-table"></i>
+            Modifica stato di una segnalazione</div>
+
+          <form method="post" action="index.php" style="margin-top:5%; margin-left:5%">
+  <b>CODICE SEGNALAZIONE DA MODIFICARE: <input type="text" name="id"><br><br></b>
+  <b> INSERISCI LO STATO MODIFICATO: </b>
+  <select class="text" name="stato">
+    <option value="Risolto">Risolto</option>
+    <option value="In risoluzione">In risoluzione</option>
+  </select>
+  <input type="submit" class="btn btn-primary btn-block" style="width:15%; margin-top:5%;">
+</form>
+          <?php
+          //session_start(); // Assicurati di avviare la sessione
+          
+          if (isset($_POST['id']) && isset($_POST['stato'])) {
+            $id = $_POST['id'];
+            $stato = $_POST['stato'];
+            $email = $_SESSION['email'];
+            $pass = $_SESSION['pass'];
+
+            $config = include ('php/config.php');
+            $psw = $config['DB_PSW'];
+            $conn = mysqli_connect("localhost", "SSE24", $psw, "civicsense");
+
+            if (!$conn) {
+              die("Connessione non riuscita: " . mysqli_connect_error());
+            }
+
+            $stmt = $conn->prepare("SELECT * FROM segnalazioni WHERE id = ?");
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows > 0) {
+              echo "1";
+              $stmt1 = $conn->prepare("UPDATE segnalazioni SET stato = ? WHERE id = ?");
+              $stmt1->bind_param("si", $stato, $id);
+              $stmt1->execute();
+            } else {
+              echo "Nessun record trovato con l'ID specificato.";
+            }
+
+            $stmt->close();
+            $stmt1->close();
+            $conn->close();
+          }
+          ?>
+
+
+          <br><br><br>
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="fas fa-table"></i>
+              Informazioni
+            </div>
+            <div class="card-body">
+              <div class="table-responsive" style="overflow-x: scroll;">
+                <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>CODICE TEAM</th>
+                      <th>E-MAIL</th>
+                      <th>NUMERO MEMBRI</th>
+                      <th>NOME MEMBRI</th>
+                      <th>DATA LOGIN</th>
+                    </tr>
+                  </thead>
+                  <?php include ("php/dashboardTeam.php") ?>
+                </table>
+                <br><br>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bootstrap core JavaScript-->
+          <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+          <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+          <!-- Core plugin JavaScript-->
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"
+            integrity="sha512-0QbL0ph8Tc8g5bLhfVzSqxe9GERORsKhIn1IrpxDAgUsbBGz/V7iSav2zzW325XGd1OMLdL4UiqRJj702IeqnQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+          <!-- Page level plugin JavaScript-->
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
+            integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+          <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+
+          <!-- Custom scripts for all pages-->
+          <script src="js/sb-admin.min.js"></script>
+
+          <!-- Demo scripts for this page-->
+          <script src="js/demo/datatables-demo.js"></script>
+</body>
 
 </html>
