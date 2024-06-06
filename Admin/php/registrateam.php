@@ -9,7 +9,7 @@ $numeri = (isset($_POST['numero'])) ? $_POST['numero'] : null;
 $config = include ('config.php');
 $psw = $config['DB_PSW'];
 $conn = mysqli_connect("localhost", "SSE24", $psw, "civicsense") or die("Connessione non riuscita");
-$nomi = sanitaze($nomi, $conn);
+$nomi = sanitize($nomi, $conn);
 if (isset($_POST['submit3'])) {
     if ($email && $nomi && $numeri !== null) {
         #inserisco i valori salvati dal form nella query di inserimento
@@ -45,15 +45,18 @@ if (isset($_POST['submit3'])) {
 #}
 
 
-/* Able to sanitaze the input string by the user.
+/* Able to sanitize the input string by the user.
 Params:
-$string = The input string to sanitaze.
+$string = The input string to sanitize.
 $conn = The connection to the database. */
-function sanitaze($string, $conn)
+function sanitize($string, $conn)
 {
+    $string = trim($string);
+    $string = str_replace("\\", "", $string);
+    $string = str_replace("/", "", $string);
     $string = stripslashes($string);
     $string = mysqli_real_escape_string($conn, $string);
-    $string = htmlspecialchars($string);
+    $string = strip_tags($string);
     return $string;
 }
 ?>
