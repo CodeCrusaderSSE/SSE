@@ -90,7 +90,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
               $adminId = $row['id'];
               $_SESSION['idA']=$row['id'];
               $currentDateTime = date("Y-m-d H:i:s", time());
-              $query2="INSERT INTO logging VALUES ('$adminId','admin','$currentDateTime')";
+              $query2="INSERT INTO logging VALUES ('$adminId','admin','$currentDateTime','login')";
               $result2=mysqli_query($conn,$query2);
             echo 'Accesso consentito alla sezione riservata';
             echo '<script>window.location.href = "index.php";</script>';
@@ -113,7 +113,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
                     $_SESSION['idT'] = $row['codice'];
                     $idT=$_SESSION['idT'];
                     $currentDateTime = date("Y-m-d H:i:s", time());
-                    $query2="INSERT INTO logging VALUES ('$idT','team','$currentDateTime')";
+                    $query2="INSERT INTO logging VALUES ('$idT','team','$currentDateTime','login')";
                     $result2=mysqli_query($conn,$query2);
                     echo 'Accesso consentito area riservata (TEAM)';
                     header("Location: http://localhost/Ingegneria/Team/index.php");

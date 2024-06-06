@@ -17,6 +17,12 @@ if (isset($_POST['id']) && isset($_POST['stato'])) {
 	$config = include ('php/config.php');
 	$psw = $config['DB_PSW'];
 	$conn = mysqli_connect("localhost", "SSE24", $psw, "civicsense") or die("Connessione non riuscita");
+	$email=$_SESSION['email'];
+	$pass=$_SESSION['pass'];
+		
+	$config = include('php/config.php');
+	$psw = $config['DB_PSW'];
+	$conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessione non riuscita");
 	$stmt = $conn->prepare("SELECT * FROM segnalazioni WHERE id = ?");
 	$stmt->bind_param("i", $ids);
 	$stmt->execute();
@@ -32,8 +38,18 @@ if (isset($_POST['id']) && isset($_POST['stato'])) {
 
 	/* if ($result) {
 		//da team a ente e utente
+<<<<<<< HEAD
 		$row = $result->fetch_assoc();
 		if ($row['stato'] == "In attesa" && $stato == "In risoluzione") { //confronta stato attuale e quello da modificare
+=======
+
+		$row =mysqli_fetch_assoc($result);
+
+
+		if($row['stato']=="In attesa" && $stato=="In risoluzione"){ //confronta stato attuale e quello da modificare
+
+
+>>>>>>> fa91331dedbc8b6d17e77433f5d6b2c3c5f762cf
 			$stmt1 = $conn->prepare("UPDATE segnalazioni SET stato = ? WHERE id = ?");
 			$stmt1->bind_param("si", $stato, $ids);
 			$stmt1->execute();
