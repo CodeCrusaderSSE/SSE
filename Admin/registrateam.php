@@ -199,33 +199,44 @@
     $result = $stmt->get_result();
     if ($result->num_rows > 0) {
       $row = $result->fetch_assoc();
-      if ($row["password"] !== $oldPassword) {
+
+
+      /*       if ($row["password"] !== $oldPassword) {
+              echo ('<center><p style="color:white"><b>Vecchia password non corretta.</b></p></center>');
+              die("");
+            } */
+
+      if (password_verify($oldPassword, $row["password"])) {
+
+        $password = password_hash($password, PASSWORD_DEFAULT);
+
+        $stmt = $conn->prepare("UPDATE team SET password = ? WHERE email_t = ?");
+        if ($stmt === false) {
+          die("Prepare failed: " . $conn->error);
+        }
+        // Bind the parameters
+        $stmt->bind_param("ss", $password, $email);
+        $result = $stmt->execute();
+        // Execute the statement
+        if ($result === TRUE) {
+          echo "";
+          echo ('<center><p style="color:white"><b>Password aggiornata con successo.</b></p></center>');
+        } else {
+          echo "" . $stmt->error;
+          echo ('<center><p style="color:white"><b>Password non aggiornata.</b></p></center>');
+
+        }
+
+        // Close the statement
+        $stmt->close();
+
+
+      } else {
         echo ('<center><p style="color:white"><b>Vecchia password non corretta.</b></p></center>');
         die("");
       }
     }
 
-
-    $stmt = $conn->prepare("UPDATE team SET password = ? WHERE email_t = ?");
-    if ($stmt === false) {
-      die("Prepare failed: " . $conn->error);
-    }
-
-    // Bind the parameters
-    $stmt->bind_param("ss", $password, $email);
-    $result = $stmt->execute();
-    // Execute the statement
-    if ($result === TRUE) {
-      echo "";
-      echo ('<center><p style="color:white"><b>Password aggiornata con successo.</b></p></center>');
-    } else {
-      echo "" . $stmt->error;
-      echo ('<center><p style="color:white"><b>Password non aggiornata.</b></p></center>');
-
-    }
-
-    // Close the statement
-    $stmt->close();
   } else {
     echo ("<br><center><p><font color=white font face='Courier'>Bisogna compilare tutti i campi!</p><center><br> ");
 

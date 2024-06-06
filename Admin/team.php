@@ -1,4 +1,4 @@
-<?php session_start()?>
+<?php session_start() ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -118,12 +118,12 @@
           <span>Home</span>
         </a>
       </li>
-              <li class="nav-item active">
-          <a class="nav-link" href="dashboard.php">
-            <i class="fas fa-fw fa-folder"></i>
-            <span>Dashboard</span>
-          </a>
-        </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="dashboard.php">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
 
 
       <li class="nav-item dropdown">
@@ -300,19 +300,20 @@
             $psw = $config['DB_PSW'];
             $conn = mysqli_connect("localhost", "SSE24", $psw, "civicsense") or die("Connessione non riuscita");
             $nomi = sanitaze($nomi, $conn);
-            $email=sanitaze($email,$conn);
+            $email = sanitaze($email, $conn);
             if ($email && $nomi && $numeri !== null) {
               #inserisco i valori salvati dal form nella query di inserimento
+              $password = password_hash($email, PASSWORD_DEFAULT);
               $stmt = $conn->prepare("INSERT INTO team (email_t, npersone, nomi, password) VALUES (?,?,?,?)");
-              $stmt->bind_param("siss", $email, $numeri, $nomi, $email);
+              $stmt->bind_param("siss", $email, $numeri, $nomi, $password);
               $result = $stmt->execute();
 
               if ($result) {
                 echo "<p>Team registrato con successo. La password è <b>$email</b></p>";
-                $adminId=$_SESSION['idA'];
+                $adminId = $_SESSION['idA'];
                 $currentDateTime = date("Y-m-d H:i:s", time());
-                $query2="INSERT INTO logging VALUES ('$adminId','admin','$currentDateTime','insert team')";
-                $result2=mysqli_query($conn,$query2);
+                $query2 = "INSERT INTO logging VALUES ('$adminId','admin','$currentDateTime','insert team')";
+                $result2 = mysqli_query($conn, $query2);
               }
             } else {
               echo "<p>Team non registrato.</p>";
