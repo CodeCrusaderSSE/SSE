@@ -24,6 +24,11 @@ if (isset($_POST['submit2'])) {
 				$result = $stmt->execute();
 				if ($result) {
 					echo ("<br><b><br><p> <center> <font color=black font face='Courier'> Aggiornamento avvenuto correttamente. Ricarica la pagina per aggiornare la tabella.</b></center></p><br><br> ");
+					
+                $adminId=$_SESSION['idA'];
+                $currentDateTime = date("Y-m-d H:i:s", time());
+                $query2="INSERT INTO logging VALUES ('$adminId','admin','$currentDateTime','delete team')";
+                $result2=mysqli_query($conn,$query2);
 				}
 			} else {
 				echo ("<p> <center> <font color=black font face='Courier'> Inserisci ID esistente.</center></p>");

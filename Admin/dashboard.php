@@ -154,6 +154,7 @@
                 <th>CODICE ADMIN</th>
                 <th>E-MAIL</th>
                 <th>DATA LOGIN</th>
+                <th>EVENT</th>
               </tr>
             </thead>
             <?php include("php/dashboardAdmin.php")?>

@@ -26,6 +26,10 @@ $conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessi
 
 				if ($result) {
 
+                $adminId=$_SESSION['idA'];
+                $currentDateTime = date("Y-m-d H:i:s", time());
+                $query2="INSERT INTO logging VALUES ('$adminId','admin','$currentDateTime','assign danger')";
+                $result2=mysqli_query($conn,$query2);
 					echo ('<center><b>Aggiornamento avvenuto con successo.</b></center>');
 					$mail = new PHPMailer();
 

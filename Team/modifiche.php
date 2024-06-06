@@ -15,8 +15,8 @@ if (isset($_POST['id'])&& isset($_POST['stato'])) {
 	$pass=$_SESSION['pass'];
 		
 	$config = include('php/config.php');
-$psw = $config['DB_PSW'];
-$conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessione non riuscita"); 
+	$psw = $config['DB_PSW'];
+	$conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessione non riuscita");
 	$stmt = $conn->prepare("SELECT * FROM segnalazioni WHERE id = ?");
 	$stmt->bind_param("i",$ids);
 	$stmt->execute();
@@ -25,7 +25,8 @@ $conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessi
 	if($result){
 		//da team a ente e utente
 
-		$row = $result->fetch_assoc();
+		$row =mysqli_fetch_assoc($result);
+
 
 		if($row['stato']=="In attesa" && $stato=="In risoluzione"){ //confronta stato attuale e quello da modificare
 
