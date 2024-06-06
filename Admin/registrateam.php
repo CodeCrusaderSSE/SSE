@@ -129,7 +129,7 @@
               </div>
               <button type="submit" class="btn btn-primary mb-3">Registrati</button>
             </form>
-            <h3 class="card-title">Registrazione</h3>
+
             <div>
               <h5>Linee guida per una password sicura:</h5>
               <ul>
@@ -185,6 +185,11 @@
 
     } else {
       echo ('<center><p style="color:white"><b>La nuova password contiene caratteri non ammessi.</b></p></center>');
+      die("");
+    }
+
+    if ($password == "GattoVerde123") {
+      echo ('<center><p style="color:white"><b>Non puoi usare la password consigliata..</b></p></center>');
       die("");
     }
 
