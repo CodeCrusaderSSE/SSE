@@ -226,7 +226,8 @@
                 $conn = mysqli_connect("localhost", "SSE24", $psw, "civicsense") or die("Connessione non riuscita");
 
                 $selezione = mysqli_query($conn, "SELECT email_t, codice FROM team") or die(mysqli_error());
-
+    
+                
                 if ($selezione) {
                   while ($array = mysqli_fetch_assoc($selezione)) {
                     $email = $array["email_t"];

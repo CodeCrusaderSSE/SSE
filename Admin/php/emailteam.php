@@ -2,7 +2,7 @@
 require ('C:\xampp\htdocs\Ingegneria\Admin\phpmailer\src\PHPMailer.php');
 include ('C:\xampp\htdocs\Ingegneria\Admin\phpmailer\src\SMTP.php');
 
-$config = include('config.php');
+$config = include ('config.php');
 $id = (isset($_POST['id'])) ? $_POST['id'] : null;
 $team = (isset($_POST['team'])) ? $_POST['team'] : null;
 
@@ -10,11 +10,16 @@ $team = (isset($_POST['team'])) ? $_POST['team'] : null;
 if (isset($_POST['submit'])) {
 
 	if ($id && $team !== null) {
-		$config = include('php/config.php');
-$psw = $config['DB_PSW'];
-$conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessione non riuscita");
+
+		
+		$config = include ('php/config.php');
+		$psw = $config['DB_PSW'];
+		$conn = mysqli_connect("localhost", "SSE24", $psw, "civicsense") or die("Connessione non riuscita");
 		$resultC = mysqli_query($conn, "SELECT * FROM segnalazioni WHERE gravita IS NOT NULL AND team IS NULL");
 
+		$id = sanitize($id, $conn);
+		$team = sanitize($team, $conn);
+		
 		if ($resultC) {
 			$row = mysqli_fetch_assoc($resultC);
 			if ($id == $row['id']) {
@@ -26,10 +31,10 @@ $conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessi
 
 				if ($result) {
 
-                $adminId=$_SESSION['idA'];
-                $currentDateTime = date("Y-m-d H:i:s", time());
-                $query2="INSERT INTO logging VALUES ('$adminId','admin','$currentDateTime','assign danger')";
-                $result2=mysqli_query($conn,$query2);
+					$adminId = $_SESSION['idA'];
+					$currentDateTime = date("Y-m-d H:i:s", time());
+					$query2 = "INSERT INTO logging VALUES ('$adminId','admin','$currentDateTime','assign danger')";
+					$result2 = mysqli_query($conn, $query2);
 					echo ('<center><b>Aggiornamento avvenuto con successo.</b></center>');
 					$mail = new PHPMailer();
 
@@ -49,7 +54,7 @@ $conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessi
 							$mail->SMTPKeepAlive = true;
 							$mail->Mailer = "smtp";
 							$mail->Username = $config['SMTP_USERNAME'];
-                            $mail->Password = $config['SMTP_PASSWORD'];
+							$mail->Password = $config['SMTP_PASSWORD'];
 							$mail->AddAddress($row["email_t"]);
 							$mail->SetFrom("civicsense2019@gmail.com");
 							$mail->Subject = 'Nuova Segnalazione';
@@ -69,6 +74,17 @@ $conn = mysqli_connect ("localhost","SSE24",$psw,"civicsense") or die ("Connessi
 		}
 	} else {
 		echo "<center><b>Inserire tutti i campi.</b></center>";
+	}
+
+	function sanitize($string, $conn)
+	{
+		$string = trim($string);
+		$string = str_replace("\\", "", $string);
+		$string = str_replace("/", "", $string);
+		$string = stripslashes($string);
+		$string = mysqli_real_escape_string($conn, $string);
+		$string = strip_tags($string);
+		return $string;
 	}
 
 }
